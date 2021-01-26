@@ -1,7 +1,4 @@
-const category = require('./category.controller')
-const product = require('./product.controller')
-
 module.exports = {
-  category,
-  product
-}
+  category: require('./category.controller'),
+  product: require('./product.controller'),
+};

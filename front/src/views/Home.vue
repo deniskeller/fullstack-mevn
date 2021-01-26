@@ -1,42 +1,43 @@
 <template>
-  <div class="home">
-    <div class="product-list">
-      <ProductCard 
-       v-for="(product, key) in products"
-       :key="key"
-       :title="product.title"
-       :description="product.description"
-       :price="product.price"
-       :imageUrl="product.imageUrl"
+  <div class="row">
+    <div
+      v-for="(product, key) in products"
+      :key="key"
+      class="col-lg-4 col-md-6 mb-4"
+    >
+      <ProductCard
+        :title="product.title"
+        :price="product.price"
+        :imageUrl="product.imageUrl"
+        :description="product.description"
       />
     </div>
-    
-
   </div>
 </template>
 
 <script>
-import {mapGetters, mapActions} from 'vuex';
+import { mapGetters, mapActions, mapMutations } from 'vuex'
 
 export default {
-  name: "Home",
+  name: 'Home',
   components: {
-    ProductCard: () => import('@/components/layouts/ProductCard')    
+    ProductCard: () => import('@/components/ProductCard'),
   },
-  mounted(){
+  mounted() {
     this.fetchProducts()
-    
   },
   computed: {
     ...mapGetters({
-      products: 'products'
-      
-    })
+      products: 'products',
+    }),
   },
   methods: {
     ...mapActions({
-      fetchProducts: 'fetchProducts'
-    })
-  }
-};
+      fetchProducts: 'fetchProducts',
+    }),
+    ...mapMutations({
+      addToCart: 'addToCart',
+    }),
+  },
+}
 </script>
